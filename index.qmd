@@ -12,8 +12,7 @@ prediction models, Bayesian analysis, and dimensionality reduction.
 
 Everything uses **clinical data**. Every exercise works in **R and Python**.
 Pick one or try both. Each exercise has a worked solution you can reveal right
-beneath it (click **Solution**); the full set is also collected in the
-[Appendix](appendices/D_exercise_solutions.qmd) for convenience.
+beneath it (click **Solution**).
 
 ## What you will learn
 
@@ -39,15 +38,15 @@ By the end of this course, you will be able to:
 
 The course runs in seven parts, in this order:
 
-| Part                                                     | Chapters | What it covers                                                                                     |
-| -------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------- |
-| **Pre-Course: Foundations**                               | 1–4      | Environment setup, probability and distributions, statistical inference, regression refresher       |
-| **Advanced Statistical Methods**                          | 5–9      | Splines and non-linear modelling, penalised regression, survival analysis, mixed-effects models, missing data and multiple imputation |
-| **Bayesian Methods**                                      | 10–11    | Bayesian inference, then applied hierarchical models for multi-site studies                         |
-| **Supervised Learning**                                   | 12–16    | ML foundations, trees and ensembles, neural networks, model evaluation beyond accuracy, explainability |
-| **Applied Supervised Learning: Clinical Prediction Models** | 17–19  | Developing models, performance assessment and validation (calibration, decision curves), reporting to TRIPOD+AI |
-| **Unsupervised Learning**                                 | 20–21    | Dimensionality reduction with PCA, t-SNE and UMAP; clustering                                       |
-| **Causal Inference and Evidence Synthesis**                | 22–24    | Causal inference (DAGs, propensity scores, weighting, g-computation, target trial emulation), mediation analysis, meta-analysis |
+| Part                                                        | Chapters | What it covers                                                                                                                        |
+| ----------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **Pre-Course: Foundations**                                 | 1–4      | Environment setup, probability and distributions, statistical inference, regression refresher                                         |
+| **Advanced Statistical Methods**                            | 5–9      | Splines and non-linear modelling, penalised regression, survival analysis, mixed-effects models, missing data and multiple imputation |
+| **Bayesian Methods**                                        | 10–11    | Bayesian inference, then applied hierarchical models for multi-site studies                                                           |
+| **Supervised Learning**                                     | 12–16    | ML foundations, trees and ensembles, neural networks, model evaluation beyond accuracy, explainability                                |
+| **Applied Supervised Learning: Clinical Prediction Models** | 17–19    | Developing models, performance assessment and validation (calibration, decision curves), reporting to TRIPOD+AI                       |
+| **Unsupervised Learning**                                   | 20–21    | Dimensionality reduction with PCA, t-SNE and UMAP; clustering                                                                         |
+| **Causal Inference and Evidence Synthesis**                 | 22–24    | Causal inference (DAGs, propensity scores, weighting, g-computation, target trial emulation), mediation analysis, meta-analysis       |
 
 A few notes on how the parts fit together. The **Pre-Course** material should be
 completed before Day 1 if you are taking this in person; if you are
@@ -120,11 +119,11 @@ from people working through it. Please tell us if you find:
 
 Suggestions go to Mark directly, and nothing you send is published anywhere:
 
-::: {.callout-note appearance="minimal"}
-Write to **<span id="statml-contact">mark dot khurana at sund dot ku dot dk</span>**
+::: {.callout-note appearance="minimal"} Write to
+**<span id="statml-contact">mark dot khurana at sund dot ku dot dk</span>**
 
-<noscript>Written out to keep the crawlers off it --- dot is a full stop, at is the @ sign.</noscript>
-:::
+<noscript>Written out to keep the crawlers off it --- dot is a full stop, at is
+the @ sign.</noscript> :::
 
 ```{=html}
 <script>
