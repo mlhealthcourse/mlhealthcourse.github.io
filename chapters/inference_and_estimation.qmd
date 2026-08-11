@@ -287,111 +287,13 @@ Simulate 100 trials, each with n=50 per group, true mean difference = 5, SD = 10
 ## R
 ```{r}
 #| eval: false
-
-set.seed(42)
-n_sims <- 100
-n_per_group <- 50
-true_diff <- 5
-sd_val <- 10
-
-contains_true <- numeric(n_sims)
-
-for (i in 1:n_sims) {
-  group1 <- rnorm(n_per_group, mean = 0, sd = sd_val)
-  group2 <- rnorm(n_per_group, mean = true_diff, sd = sd_val)
-
-  test_result <- t.test(group2, group1)
-  ci <- test_result$conf.int
-
-  contains_true[i] <- (ci[1] <= true_diff & ci[2] >= true_diff)
-}
-
-cat(
-  "Proportion of CIs containing true value:",
-  round(mean(contains_true), 3),
-  "\n"
-)
-
-# Bonus: visualize the CIs
-library(ggplot2)
-ci_data <- data.frame(
-  sim = 1:n_sims,
-  lower = numeric(n_sims),
-  upper = numeric(n_sims),
-  contains = logical(n_sims)
-)
-
-set.seed(42)
-for (i in 1:n_sims) {
-  group1 <- rnorm(n_per_group, mean = 0, sd = sd_val)
-  group2 <- rnorm(n_per_group, mean = true_diff, sd = sd_val)
-  test_result <- t.test(group2, group1)
-  ci_data$lower[i] <- test_result$conf.int[1]
-  ci_data$upper[i] <- test_result$conf.int[2]
-  ci_data$contains[i] <- (ci_data$lower[i] <= true_diff &
-    ci_data$upper[i] >= true_diff)
-}
-
-ggplot(ci_data, aes(x = sim, y = (lower + upper) / 2, color = contains)) +
-  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.3) +
-  geom_hline(yintercept = true_diff, linetype = "dashed", color = "blue") +
-  scale_color_manual(values = c("red", "darkgreen")) +
-  labs(
-    x = "Simulation",
-    y = "Mean Difference",
-    title = "95% Confidence Intervals from 100 Simulated Trials"
-  ) +
-  theme_minimal()
+#| file: ../solutions/R/inference_and_estimation_ex1.R
 ```
 
 ## Python
 ```{python}
 #| eval: false
-
-import numpy as np
-from scipy import stats
-import matplotlib.pyplot as plt
-
-np.random.seed(42)
-n_sims = 100
-n_per_group = 50
-true_diff = 5
-sd_val = 10
-
-contains_true = []
-lower_bounds = []
-upper_bounds = []
-
-for i in range(n_sims):
-    group1 = np.random.normal(0, sd_val, n_per_group)
-    group2 = np.random.normal(true_diff, sd_val, n_per_group)
-
-    diff = np.mean(group2) - np.mean(group1)
-    se = np.sqrt(np.var(group1, ddof=1)/n_per_group + np.var(group2, ddof=1)/n_per_group)
-    t_crit = stats.t.ppf(0.975, df=n_per_group*2 - 2)
-
-    lower = diff - t_crit * se
-    upper = diff + t_crit * se
-
-    lower_bounds.append(lower)
-    upper_bounds.append(upper)
-    contains_true.append(lower <= true_diff <= upper)
-
-print(f"Proportion of CIs containing true value: {np.mean(contains_true):.2f}")
-
-# Visualize
-fig, ax = plt.subplots(figsize=(10, 6))
-for i in range(n_sims):
-    color = "green" if contains_true[i] else "red"
-    ax.plot([i, i], [lower_bounds[i], upper_bounds[i]], color=color, linewidth=0.8)
-
-ax.axhline(y=true_diff, color="blue", linestyle="--", label="True difference")
-ax.set_xlabel("Simulation")
-ax.set_ylabel("Mean Difference")
-ax.set_title("95% Confidence Intervals from 100 Simulated Trials")
-ax.legend()
-plt.tight_layout()
-plt.show()
+#| file: ../solutions/python/inference_and_estimation_ex1.py
 ```
 :::
 
@@ -412,35 +314,13 @@ A clinical trial reports: "The new drug reduced 30-day mortality from 12% to 9% 
 ## R
 ```{r}
 #| eval: false
-
-# This is a conceptual exercise, but let's verify the numbers:
-p_control <- 0.12
-p_treatment <- 0.09
-
-risk_difference <- p_control - p_treatment
-risk_ratio <- p_treatment / p_control
-nnt <- 1 / risk_difference
-
-cat("Risk Difference:", round(risk_difference, 3), "\n")
-cat("Risk Ratio:", round(risk_ratio, 3), "\n")
-cat("NNT:", round(nnt, 1), "\n")
+#| file: ../solutions/R/inference_and_estimation_ex2.R
 ```
 
 ## Python
 ```{python}
 #| eval: false
-
-# This is a conceptual exercise, but let's verify the numbers:
-p_control = 0.12
-p_treatment = 0.09
-
-risk_difference = p_control - p_treatment
-risk_ratio = p_treatment / p_control
-nnt = 1 / risk_difference
-
-print(f"Risk Difference: {risk_difference}")
-print(f"Risk Ratio: {risk_ratio:.3f}")
-print(f"NNT: {nnt:.1f}")
+#| file: ../solutions/python/inference_and_estimation_ex2.py
 ```
 :::
 
@@ -462,67 +342,13 @@ You are analysing gene expression data and have tested 1,000 genes for different
 ## R
 ```{r}
 #| eval: false
-
-# Simulate 1000 p-values: 950 null (uniform), 50 truly differentially expressed
-set.seed(123)
-n_genes <- 1000
-n_true <- 50
-
-# Null p-values are uniformly distributed
-p_null <- runif(n_genes - n_true, 0, 1)
-
-# True effects: p-values will tend to be small
-p_true <- rbeta(n_true, 1, 20) # skewed toward 0
-
-p_values <- c(p_null, p_true)
-
-# How many nominally significant?
-cat("Nominally significant (p < 0.05):", sum(p_values < 0.05), "\n")
-
-# Bonferroni correction
-p_bonferroni <- p.adjust(p_values, method = "bonferroni")
-cat("Significant after Bonferroni:", sum(p_bonferroni < 0.05), "\n")
-
-# BH-FDR correction
-p_fdr <- p.adjust(p_values, method = "BH")
-cat("Significant after BH-FDR:", sum(p_fdr < 0.05), "\n")
-
-# Compare
-cat("\nBonferroni is much more conservative.\n")
-cat(
-  "FDR retains more discoveries while controlling the false discovery rate.\n"
-)
+#| file: ../solutions/R/inference_and_estimation_ex3.R
 ```
 
 ## Python
 ```{python}
 #| eval: false
-
-import numpy as np
-from statsmodels.stats.multitest import multipletests
-
-np.random.seed(123)
-n_genes = 1000
-n_true = 50
-
-# Null p-values (uniform) and true effect p-values (small)
-p_null = np.random.uniform(0, 1, n_genes - n_true)
-p_true = np.random.beta(1, 20, n_true)
-
-p_values = np.concatenate([p_null, p_true])
-
-print(f"Nominally significant (p < 0.05): {np.sum(p_values < 0.05)}")
-
-# Bonferroni correction
-reject_bonf, pvals_bonf, _, _ = multipletests(p_values, alpha=0.05, method='bonferroni')
-print(f"Significant after Bonferroni: {np.sum(reject_bonf)}")
-
-# BH-FDR correction
-reject_fdr, pvals_fdr, _, _ = multipletests(p_values, alpha=0.05, method='fdr_bh')
-print(f"Significant after BH-FDR: {np.sum(reject_fdr)}")
-
-print("\nBonferroni is much more conservative.")
-print("FDR retains more discoveries while controlling the false discovery rate.")
+#| file: ../solutions/python/inference_and_estimation_ex3.py
 ```
 :::
 
@@ -544,60 +370,13 @@ You are planning a trial to test whether a lifestyle intervention reduces HbA1c 
 ## R
 ```{r}
 #| eval: false
-
-# Using the power.t.test function
-# 80% power
-result_80 <- power.t.test(
-  delta = 0.4, # expected difference
-  sd = 1.2, # standard deviation
-  sig.level = 0.05,
-  power = 0.80,
-  type = "two.sample",
-  alternative = "two.sided"
-)
-cat("Sample size per group (80% power):", ceiling(result_80$n), "\n")
-
-# 90% power
-result_90 <- power.t.test(
-  delta = 0.4,
-  sd = 1.2,
-  sig.level = 0.05,
-  power = 0.90,
-  type = "two.sample",
-  alternative = "two.sided"
-)
-cat("Sample size per group (90% power):", ceiling(result_90$n), "\n")
-
-cat(
-  "\nIncreasing power from 80% to 90% requires about",
-  round((ceiling(result_90$n) / ceiling(result_80$n) - 1) * 100),
-  "% more participants per group.\n"
-)
+#| file: ../solutions/R/inference_and_estimation_ex4.R
 ```
 
 ## Python
 ```{python}
 #| eval: false
-
-from statsmodels.stats.power import TTestIndPower
-
-analysis = TTestIndPower()
-
-# Cohen's d = delta / sd = 0.4 / 1.2
-effect_size = 0.4 / 1.2
-
-# 80% power
-n_80 = analysis.solve_power(effect_size=effect_size, alpha=0.05, power=0.80,
-                            alternative='two-sided')
-print(f"Sample size per group (80% power): {int(np.ceil(n_80))}")
-
-# 90% power
-n_90 = analysis.solve_power(effect_size=effect_size, alpha=0.05, power=0.90,
-                            alternative='two-sided')
-print(f"Sample size per group (90% power): {int(np.ceil(n_90))}")
-
-print(f"\nIncreasing from 80% to 90% power requires about "
-      f"{int(round((n_90/n_80 - 1) * 100))}% more participants per group.")
+#| file: ../solutions/python/inference_and_estimation_ex4.py
 ```
 :::
 
