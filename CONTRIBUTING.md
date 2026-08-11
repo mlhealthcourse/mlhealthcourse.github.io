@@ -9,7 +9,7 @@
 | `_freeze/`           | Quarto execution cache, committed so CI and other contributors skip re-execution        |
 | `_includes/`         | HTML partials injected into the rendered site (analytics)                               |
 | `advanced/`          | Advanced toolkit chapters (causal inference, g-methods, mediation, meta-analysis)       |
-| `appendices/`        | Appendices (dataset codebook, math notation, further reading, exercise solutions)       |
+| `appendices/`        | Appendices (dataset codebook, math notation, further reading)                           |
 | `assets/`            | Logo and social preview images                                                          |
 | `chapters/`          | Main course chapters (`.qmd` files, numbered 00--16)                                    |
 | `data/`              | Clinical datasets (CSV) used throughout the book                                        |

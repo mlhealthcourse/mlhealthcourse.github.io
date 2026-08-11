@@ -97,7 +97,6 @@ book:
     - appendices/A_dataset_codebook.qmd
     - appendices/B_math_notation.qmd
     - appendices/C_further_reading.qmd
-    - appendices/D_exercise_solutions.qmd
 
 format:
   html:
