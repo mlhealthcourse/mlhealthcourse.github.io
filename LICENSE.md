@@ -7,7 +7,8 @@ All written content, figures, and exercises in this book are licensed under the
 
 You are free to:
 
-- **Share** -- copy and redistribute the material in any medium or format
+- **Share** -- copy and redistribute the material in any medium or format for
+  any purpose, even commercially
 - **Adapt** -- remix, transform, and build upon the material for any purpose,
   even commercially
 
@@ -15,13 +16,16 @@ Under the following terms:
 
 - **Attribution** -- You must give appropriate credit, provide a link to the
   license, and indicate if changes were made.
+- **No additional restrictions** -- You may not apply legal terms or
+  technological measures that legally restrict others from doing anything the
+  license permits.
 
 ## Code (MIT License)
 
 All code in this repository (including R and Python scripts, functions, and code
 chunks in the book chapters) is licensed under the MIT License.
 
-Copyright (c) 2025 Mark Khurana and Neil Clow
+Copyright (c) 2025 Mark Khurana and Neil Scheidwasser
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
