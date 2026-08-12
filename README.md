@@ -16,15 +16,15 @@
 
 ## What this course covers
 
-| Part                                                        | Chapters | Topics                                                                               |
-| ----------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------ |
-| **Pre-Course: Foundations**                                 | 1–4      | Environment setup, probability, statistical inference, regression foundations        |
-| **Advanced Statistical Methods**                            | 5–9      | Splines, penalised regression, survival analysis, mixed-effects models, missing data |
-| **Bayesian Methods**                                        | 10–11    | Bayesian inference, applied hierarchical models                                      |
-| **Supervised Learning**                                     | 12–16    | Trees and ensembles, neural networks, model evaluation, explainability               |
-| **Applied Supervised Learning: Clinical Prediction Models** | 17–19    | Development, validation and calibration, reporting to TRIPOD+AI                      |
-| **Unsupervised Learning**                                   | 20–21    | PCA, t-SNE, UMAP, clustering                                                         |
-| **Causal Inference and Evidence Synthesis**                 | 22–24    | Causal inference, mediation analysis, meta-analysis                                  |
+| Part                                                        | Chapters | Topics                                                                                 |
+| ----------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------- |
+| **Pre-Course: Foundations**                                 | 1–4      | Environment setup, probability, statistical inference, regression foundations          |
+| **Advanced Statistical Methods**                            | 5–9      | Splines, penalised regression, survival analysis, mixed-effects models, missing data   |
+| **Bayesian Methods**                                        | 10–11    | Bayesian inference, applied hierarchical models                                        |
+| **Supervised Learning**                                     | 12–16    | ML foundations, trees and ensembles, neural networks, model evaluation, explainability |
+| **Applied Supervised Learning: Clinical Prediction Models** | 17–19    | Development, validation and calibration, reporting to TRIPOD+AI                        |
+| **Unsupervised Learning**                                   | 20–21    | PCA, t-SNE, UMAP, clustering                                                           |
+| **Causal Inference and Evidence Synthesis**                 | 22–24    | Causal inference, mediation analysis, meta-analysis                                    |
 
 ## Who it is for
 
@@ -51,7 +51,7 @@ If you use this course in your teaching or research, please cite:
 
 ```bibtex
 @online{statML2026,
-  author = {Khurana, Mark},
+  author = {Khurana, Mark and Scheidwasser, Neil},
   title = {Advanced Statistics and Machine Learning for Health Research},
   year = {2026},
   url = {https://mlhealthcourse.github.io/},
@@ -61,22 +61,31 @@ If you use this course in your teaching or research, please cite:
 
 ## Running locally
 
+The project uses [pixi](https://pixi.sh) to manage all dependencies (Quarto, R,
+Python packages). Install pixi, then:
+
 ```bash
-# Requires Quarto (>= 1.7), R, and the packages listed in scripts/common.R
-quarto render
+# Python-only students
+pixi install && pixi run render
+
+# Python + R students
+pixi install -e full && pixi run -e full render
+
+# Contributors (full dev tooling)
+pixi install -e dev && pixi run -e dev render
 ```
 
 ## Key sources
 
-- Smits, van Kuijk & Wynants, _Improving Health Care with Clinical Prediction
-  Models_ (2026)
-- Van Calster et al., _Lancet Digital Health_ (2025) -- performance measures
-- Lopez-Ayala et al., _BMJ_ (2025) -- continuous variables and splines
-- Collins et al., _BMJ_ (2024) -- TRIPOD+AI reporting guidelines
-- Harrell, _Regression Modeling Strategies_ (2015)
-- McElreath, _Statistical Rethinking_ (2020)
+- Smits J, van Kuijk S & Wynants L, _Improving Health Care with Clinical
+  Prediction Models_ (2026)
+- Van Calster B et al., _Lancet Digital Health_ (2025) -- performance measures
+- Lopez-Ayala A et al., _BMJ_ (2025) -- continuous variables and splines
+- Collins GS et al., _BMJ_ (2024) -- TRIPOD+AI reporting guidelines
+- Harrell FE, _Regression Modeling Strategies_ (2015)
+- McElreath R, _Statistical Rethinking_ (2020)
 
 ## Licence
 
-[Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
-Use it, adapt it, share it -- just give credit.
+Content is [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); code is
+[MIT](LICENSE.md). Use it, adapt it, share it -- just give credit.
